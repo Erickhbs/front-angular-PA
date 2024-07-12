@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DiaSemanaRequest, DiaSemanaResponse } from '../dados/dia-semana-data';
+import { DiaSemana } from '../dados/dia-semana-data';
 import { response } from 'express';
 
 @Injectable({
@@ -7,21 +7,21 @@ import { response } from 'express';
 })
 export class DiaSemanaService {
   readonly url = 'http://localhost:8080/dia/'
-  diaSemanaResponse!: DiaSemanaResponse;
+  diaSemana!: DiaSemana;
 
   constructor() { }
 
-  async getDia(): Promise<DiaSemanaResponse[]>{
+  async getDias(): Promise<DiaSemana[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getDiaById(id: number): Promise<DiaSemanaResponse>{
+  async getDiaById(id: number): Promise<DiaSemana>{
     const data = await fetch(`${this.url}${id}`);
     return await data.json();
   }
 
-  async cadastrarDia(diaSemana: DiaSemanaRequest){
+  async cadastrarDia(diaSemana: DiaSemana){
     await fetch(this.url,{
       method: 'POST',
       headers: {
@@ -38,7 +38,7 @@ export class DiaSemanaService {
     //this.router.navigate(['']);
   }
 
-  async atualizarDia(diaSemana: DiaSemanaRequest){
+  async atualizarDia(diaSemana: DiaSemana){
     fetch(this.url,{
       method: 'PUT',
       headers: {

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ServicoService } from '../service/servico.service';
-import { ServicoRequest } from '../dados/servico-data';
+import { Servico } from '../dados/servico-data';
 
 @Component({
   selector: 'app-cadastrar-servico',
@@ -23,7 +23,7 @@ import { ServicoRequest } from '../dados/servico-data';
 })
 export class CadastrarServicoComponent {
   servicoService = inject(ServicoService);
-  servicoRequest!: ServicoRequest;
+  servico!: Servico;
 
   aplicaForm = new FormGroup({
     inputNome: new FormControl(''),
@@ -33,11 +33,11 @@ export class CadastrarServicoComponent {
   submeterForm(){
     const campos = this.aplicaForm.value;
 
-    this.servicoRequest = {
+    this.servico = {
       nome: campos.inputNome ?? '',
       preco: campos.inputPreco ?? 0
     };
 
-    this.servicoService.cadastrarServico(this.servicoRequest);
+    this.servicoService.cadastrarServico(this.servico);
   }
 }

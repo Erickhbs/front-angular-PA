@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DiaSemana } from '../dados/dia-semana-data';
 import { DiaSemanaService } from '../service/dia-semana.service';
-import { HorarioService } from '../service/horario.service';
-import { Horario } from '../dados/horario-data';
 
 @Component({
   selector: 'app-cadastrar-dia-semana',

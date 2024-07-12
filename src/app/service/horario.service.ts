@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HorarioRequest, HorarioResponse } from '../dados/horario-data';
+import { Horario } from '../dados/horario-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorarioService {
   readonly url = 'http://localhost:8080/horario/'
-  horarioResponse!: HorarioResponse;
+  horario!: Horario;
 
   constructor() { }
 
-  async getHorarios(): Promise<HorarioResponse[]>{
+  async getHorarios(): Promise<Horario[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getHorarioById(id: number): Promise<HorarioResponse>{
+  async getHorarioById(id: number): Promise<Horario>{
     const data = await fetch(`${this.url}${id}`);
     return await data.json();
   }
 
-  async cadastrarHorario(horario: HorarioRequest){
+  async cadastrarHorario(horario: Horario){
     await fetch(this.url,{
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ export class HorarioService {
     //this.router.navigate(['']);
   }
 
-  async atualizarHorario(horario: HorarioRequest){
+  async atualizarHorario(horario: Horario){
     fetch(this.url,{
       method: 'PUT',
       headers: {

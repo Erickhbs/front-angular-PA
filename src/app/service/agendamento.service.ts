@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { AgendamentoRequest, AgendamentoResponse } from '../dados/agendamento-data';
+import { Agendamento } from '../dados/agendamento-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgendamentoService {
   readonly url = 'http://localhost:8080/agendamento/'
-  agendamentoResponse!: AgendamentoResponse;
+  agendamento!: Agendamento;
 
   constructor() { }
 
-  async getAgendamento(): Promise<AgendamentoResponse[]>{
+  async getAgendamentos(): Promise<Agendamento[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getAgendamentoById(id: number): Promise<AgendamentoResponse>{
+  async getAgendamentoById(id: number): Promise<Agendamento>{
     const data = await fetch(`${this.url}${id}`);
     return await data.json();
   }
 
-  async cadastrarAgendamento(agendamento: AgendamentoRequest){
+  async cadastrarAgendamento(agendamento: Agendamento){
     await fetch(this.url,{
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ export class AgendamentoService {
     //this.router.navigate(['']);
   }
 
-  async atualizarAgendamento(agendamento: AgendamentoRequest){
+  async atualizarAgendamento(agendamento: Agendamento){
     fetch(this.url,{
       method: 'PUT',
       headers: {

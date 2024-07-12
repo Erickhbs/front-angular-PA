@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
-import { ServicoRequest, ServicoResponse } from '../dados/servico-data';
+import { Servico } from '../dados/servico-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicoService {
   readonly url = 'http://localhost:8080/servico/'
-  servicoResponse!: ServicoResponse;
+  servicoResponse!: Servico;
 
   constructor() { }
 
-  async getServico(): Promise<ServicoResponse[]>{
+  async getServicos(): Promise<Servico[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getServicoById(id: number): Promise<ServicoResponse>{
+  async getServicoById(id: number): Promise<Servico>{
     const data = await fetch(`${this.url}${id}`);
     return await data.json();
   }
 
-  async cadastrarServico(servico: ServicoRequest){
+  async cadastrarServico(servico: Servico){
     await fetch(this.url,{
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ export class ServicoService {
     //this.router.navigate(['']);
   }
 
-  async atualizarServico(servico: ServicoRequest){
+  async atualizarServico(servico: Servico){
     fetch(this.url,{
       method: 'PUT',
       headers: {

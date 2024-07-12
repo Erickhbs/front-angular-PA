@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HorarioService } from '../service/horario.service';
-import { HorarioRequest } from '../dados/horario-data';
+import { Horario } from '../dados/horario-data';
 
 @Component({
   selector: 'app-cadastrar-horario',
@@ -29,7 +29,7 @@ import { HorarioRequest } from '../dados/horario-data';
 })
 export class CadastrarHorarioComponent {
   horarioService = inject(HorarioService);
-  horarioRequest!: HorarioRequest; 
+  horario!: Horario; 
   
   aplicaForm = new FormGroup({
     inputHoras: new FormControl(0),
@@ -39,11 +39,11 @@ export class CadastrarHorarioComponent {
   submeterForm(){
     const campos = this.aplicaForm.value;
 
-    this.horarioRequest = {
+    this.horario = {
       horas: campos.inputHoras as number,
       minutos: campos.inputMinutos as number,
     }
 
-    this.horarioService.cadastrarHorario(this.horarioRequest)
+    this.horarioService.cadastrarHorario(this.horario)
   }
 }
