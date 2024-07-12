@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { DiaSemanaRequest } from '../dados/dia-semana-data';
+import { DiaSemana } from '../dados/dia-semana-data';
 import { DiaSemanaService } from '../service/dia-semana.service';
 import { HorarioService } from '../service/horario.service';
-import { HorarioRequest, HorarioResponse } from '../dados/horario-data';
+import { Horario } from '../dados/horario-data';
 
 @Component({
   selector: 'app-cadastrar-dia-semana',
@@ -23,7 +23,7 @@ import { HorarioRequest, HorarioResponse } from '../dados/horario-data';
 })
 export class CadastrarDiaSemanaComponent {
   diaSemanaService = inject(DiaSemanaService);
-  diaSemanaRequest!: DiaSemanaRequest;
+  diaSemana!: DiaSemana;
 
   aplicaForm = new FormGroup({
     inputDia: new FormControl(''),
@@ -37,10 +37,10 @@ export class CadastrarDiaSemanaComponent {
 
     console.log(campos.inputDisponivel)
 
-    this.diaSemanaRequest = {
+    this.diaSemana = {
       dia: campos.inputDia ?? '',
     };
 
-    this.diaSemanaService.cadastrarDia(this.diaSemanaRequest);
+    this.diaSemanaService.cadastrarDia(this.diaSemana);
   }
 }

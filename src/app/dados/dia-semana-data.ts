@@ -1,15 +1,8 @@
-import { HorarioResponse } from "./horario-data";
+import { Horario } from "./horario-data";
 
-export interface DiaSemanaRequest {
+export interface DiaSemana {
     id?: string;
     dia: string;
     disponivel?: boolean;
-    horarios?: HorarioResponse[];
-}
-
-export interface DiaSemanaResponse {
-    id: string;
-    dia: string;
-    disponivel: boolean;
-    horarios: HorarioResponse[];
+    horarios?: Horario[];
 }

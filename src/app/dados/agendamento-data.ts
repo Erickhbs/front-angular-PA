@@ -1,17 +1,10 @@
-import { DiaSemanaResponse } from "./dia-semana-data";
-import { HorarioResponse } from "./horario-data";
-import { ServicoResponse } from "./servico-data";
+import { DiaSemana } from "./dia-semana-data";
+import { Horario } from "./horario-data";
+import { Servico } from "./servico-data";
 
-export interface AgendamentoRequest {
+export interface Agendamento {
     id: string;
-    dia: DiaSemanaResponse;
-    horario: HorarioResponse;
-    servico: ServicoResponse;
-}
-
-export interface AgendamentoResponse {
-    id: string;
-    dia: DiaSemanaResponse;
-    horario: HorarioResponse;
-    servico: ServicoResponse;
+    dia: DiaSemana;
+    horario: Horario;
+    servico: Servico;
 }

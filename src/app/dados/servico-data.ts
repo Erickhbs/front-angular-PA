@@ -1,15 +1,8 @@
-import { DiaSemanaResponse } from "./dia-semana-data";
+import { DiaSemana } from "./dia-semana-data";
 
-export interface ServicoRequest {
+export interface Servico {
     id?: string;
     nome: string;
     preco: number;
-    dias?: DiaSemanaResponse[];
-}
-
-export interface ServicoResponse {
-    id: string;
-    nome: string;
-    preco: number;
-    dias: DiaSemanaResponse[];
+    dias?: DiaSemana[];
 }
