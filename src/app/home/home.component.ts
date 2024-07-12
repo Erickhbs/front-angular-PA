@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <p>
-      Pica dura mole
+      Bem-vindo a melhor barbearia do nordeste!
     </p>
   `,
   styleUrl: './home.component.css'
