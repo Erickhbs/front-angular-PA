@@ -3,7 +3,7 @@ import { Horario } from "./horario-data";
 import { Servico } from "./servico-data";
 
 export interface Agendamento {
-    id: string;
+    id?: string;
     dia: DiaSemana;
     horario: Horario;
     servico: Servico;

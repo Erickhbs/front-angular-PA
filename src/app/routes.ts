@@ -3,6 +3,7 @@ import { CadastrarDiaSemanaComponent } from "./cadastrar-dia-semana/cadastrar-di
 import { CadastrarHorarioComponent } from "./cadastrar-horario/cadastrar-horario.component";
 import { CadastrarServicoComponent } from "./cadastrar-servico/cadastrar-servico.component";
 import { HomeComponent } from "./home/home.component";
+import { CadastrarAgendamentoComponent } from "./cadastrar-agendamento/cadastrar-agendamento.component";
 
 const routeConfig: Routes = [
     {
@@ -24,6 +25,11 @@ const routeConfig: Routes = [
         path: 'cadastro-servico',
         component: CadastrarServicoComponent,
         title: 'Cadastro de serviço'
+    },
+    {
+        path: 'cadastro-agendamento',
+        component: CadastrarAgendamentoComponent,
+        title: 'Página de agendamento'
     }
 ];
 
