@@ -4,8 +4,10 @@ import { CadastrarHorarioComponent } from "./cadastrar-horario/cadastrar-horario
 import { CadastrarServicoComponent } from "./cadastrar-servico/cadastrar-servico.component";
 import { HomeComponent } from "./home/home.component";
 import { CadastrarAgendamentoComponent } from "./cadastrar-agendamento/cadastrar-agendamento.component";
+import { LoginPageComponent } from "./login-page/login-page.component";
 
 const routeConfig: Routes = [
+    
     {
         path: '',
         component: HomeComponent,
@@ -30,7 +32,13 @@ const routeConfig: Routes = [
         path: 'cadastro-agendamento',
         component: CadastrarAgendamentoComponent,
         title: 'Página de agendamento'
+    },
+    {
+        path: 'login-page',
+        component: LoginPageComponent,
+        title: 'Página Login'
     }
+
 ];
 
 export default routeConfig;
