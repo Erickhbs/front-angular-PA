@@ -11,10 +11,12 @@ import { DiaSemanaService } from '../service/dia-semana.service';
     <h1>Cadastro de dia da semana</h1>
 
     <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-      <label for="input-dia">Dia da semana</label><br>
-      <input type="text" name="" id="input-dia" formControlName="inputDia"><br>
-
-      <button type="submit">Cadastrar</button>
+      <div class="form-floating">
+        <input type="text" name="" id="input-dia" formControlName="inputDia" class="form-control" placeholder="Dia da semana">
+        <label for="input-dia" class="form-label">Dia da semana</label>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-dark">Cadastrar</button>
     </form>
   `,
   styleUrl: './cadastrar-dia-semana.component.css'

@@ -10,13 +10,17 @@ import { Servico } from '../dados/servico-data';
   template: `
     <h1>Cadastrar serviço</h1>
     <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-      <label for="input-nome">Nome</label><br>
-      <input type="text" id="input-nome" formControlName="inputNome"><br>
-
-      <label for="input-preco">Preço</label><br>
-      <input type="text" id="input-preco" formControlName="inputPreco"><br>
-
-      <button type="submit">Cadastrar</button>
+      <div class="form-floating">
+        <input type="text" id="input-nome" class="form-control" formControlName="inputNome" placeholder="Nome">
+        <label for="input-nome" class="form-label">Nome</label>
+      </div>
+      <br>
+      <div class="form-floating">
+        <input type="text" id="input-preco" class="form-control" formControlName="inputPreco" placeholder="Preço">
+        <label for="input-preco" class="form-label">Preço</label>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-dark">Cadastrar</button>
     </form>
   `,
   styleUrl: './cadastrar-servico.component.css'
@@ -27,7 +31,7 @@ export class CadastrarServicoComponent {
 
   aplicaForm = new FormGroup({
     inputNome: new FormControl(''),
-    inputPreco: new FormControl(0)
+    inputPreco: new FormControl()
   });
 
   submeterForm(){

@@ -18,21 +18,21 @@ import { AgendamentoService } from '../service/agendamento.service';
 
     <form [formGroup]="aplicaForm" (submit)="submeterForm()">
       <label for="input-dia">Dia</label><br>
-      <select id="input-dia" formControlName="inputDia">
+      <select id="input-dia" formControlName="inputDia" class="form-select" aria-label="Default select example">
         <option *ngFor="let d of diaList" value="{{ d.id }}">{{ d.dia }}</option>
-      </select><br>
+      </select><br>form-floating
 
       <label for="input-horario">Horário</label><br>
-      <select id="input-horario" formControlName="inputHorario">
+      <select id="input-horario" formControlName="inputHorario" class="form-select" aria-label="Default select example">
         <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.horas }}:{{ h.minutos }}</option>
       </select><br>
 
       <label for="input-servico">Serviço</label><br>
-      <select id="input-servico" formControlName="inputServico">
+      <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
         <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }}</option>
       </select><br>
 
-      <button type="submit">Agendar</button>
+      <button type="submit" class="btn btn-dark">Agendar</button>
     </form>
   `,
   styleUrl: './cadastrar-agendamento.component.css'
