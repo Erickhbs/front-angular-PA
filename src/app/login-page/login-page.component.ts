@@ -13,7 +13,7 @@ import { LoginService } from '../service/login.service';
   <main>
     <div class="container" id="container" #containerRef>
       <div class="form-container sign-up">
-        <form [formGroup]="aplicaFormRegister"]>
+        <form [formGroup]="aplicaFormRegister" (submit)="register()">
           <h1>Criar Conta</h1>
           <input type="text" placeholder="Nome" formControlName="inputNome">
           <input type="email" placeholder="Email" formControlName="inputEmail">
@@ -22,7 +22,7 @@ import { LoginService } from '../service/login.service';
         </form>
       </div>
       <div class="form-container sign-in">
-        <form [formGroup]="aplicaFormLogin"]>
+        <form [formGroup]="aplicaFormLogin" (submit)="login()">
           <h1>Log-in</h1>
           <input type="email" placeholder="Email" formControlName="inputEmail">
           <input type="password" placeholder="Senha" formControlName="inputSenha">
