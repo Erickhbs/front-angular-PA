@@ -21,12 +21,15 @@ export class AgendamentoService {
   }
 
   async cadastrarAgendamento(agendamento: Agendamento){
+    const token = localStorage.getItem('token');
+
     await fetch(this.url,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(agendamento)
+      body: JSON.stringify(agendamento),
     }).then(
       (response) => {
         if(!response.ok){

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DiaSemana } from '../dados/dia-semana-data';
-import { response } from 'express';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +21,13 @@ export class DiaSemanaService {
   }
 
   async cadastrarDia(diaSemana: DiaSemana){
+    const token = localStorage.getItem('token');
+
     await fetch(this.url,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(diaSemana)
     }).then(

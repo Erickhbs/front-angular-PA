@@ -21,10 +21,13 @@ export class ServicoService {
   }
 
   async cadastrarServico(servico: Servico){
+    const token = localStorage.getItem('token');
+
     await fetch(this.url,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(servico)
     }).then(
