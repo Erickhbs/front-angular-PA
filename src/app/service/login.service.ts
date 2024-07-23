@@ -12,10 +12,13 @@ export class LoginService {
   constructor() { }
 
   async logar(loginReq: LoginRequest): Promise<LoginResponse>{
+    const token = localStorage.getItem('token');
+
     const data = await fetch(this.url,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(loginReq)
     }).then(
@@ -23,7 +26,7 @@ export class LoginService {
         if(!response.ok){
           throw new Error('Erro ao logar!');
         }
-
+        
         return response;
       }
     );

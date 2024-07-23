@@ -5,7 +5,7 @@ import { Agendamento } from '../dados/agendamento-data';
   providedIn: 'root'
 })
 export class AgendamentoService {
-  readonly url = 'http://localhost:8080/agendamento/'
+  readonly url = 'http://localhost:8080/agendamento'
   agendamento!: Agendamento;
 
   constructor() { }
@@ -16,7 +16,7 @@ export class AgendamentoService {
   }
 
   async getAgendamentoById(id: number): Promise<Agendamento>{
-    const data = await fetch(`${this.url}${id}`);
+    const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
@@ -51,7 +51,7 @@ export class AgendamentoService {
   }
 
   async deleteById(id: number){
-    fetch(`${this.url}${id}`,{
+    fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
       (response) => {

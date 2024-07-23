@@ -5,7 +5,7 @@ import { Servico } from '../dados/servico-data';
   providedIn: 'root'
 })
 export class ServicoService {
-  readonly url = 'http://localhost:8080/servico/'
+  readonly url = 'http://localhost:8080/servico'
   servicoResponse!: Servico;
 
   constructor() { }
@@ -16,7 +16,7 @@ export class ServicoService {
   }
 
   async getServicoById(id: number): Promise<Servico>{
-    const data = await fetch(`${this.url}${id}`);
+    const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
@@ -51,7 +51,7 @@ export class ServicoService {
   }
 
   async deleteById(id: number){
-    fetch(`${this.url}${id}`,{
+    fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
       (response) => {

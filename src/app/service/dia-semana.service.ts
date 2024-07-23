@@ -5,7 +5,7 @@ import { DiaSemana } from '../dados/dia-semana-data';
   providedIn: 'root'
 })
 export class DiaSemanaService {
-  readonly url = 'http://localhost:8080/dia/'
+  readonly url = 'http://localhost:8080/dia'
   diaSemana!: DiaSemana;
 
   constructor() { }
@@ -16,7 +16,7 @@ export class DiaSemanaService {
   }
 
   async getDiaById(id: number): Promise<DiaSemana>{
-    const data = await fetch(`${this.url}${id}`);
+    const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
@@ -51,7 +51,7 @@ export class DiaSemanaService {
   }
 
   async deleteById(id: number){
-    fetch(`${this.url}${id}`,{
+    fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
       (response) => {

@@ -5,7 +5,7 @@ import { Horario } from '../dados/horario-data';
   providedIn: 'root'
 })
 export class HorarioService {
-  readonly url = 'http://localhost:8080/horario/'
+  readonly url = 'http://localhost:8080/horario'
   horario!: Horario;
 
   constructor() { }
@@ -16,12 +16,13 @@ export class HorarioService {
   }
 
   async getHorarioById(id: number): Promise<Horario>{
-    const data = await fetch(`${this.url}${id}`);
+    const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
   async cadastrarHorario(horario: Horario){
     const token = localStorage.getItem('token');
+    console.log(horario)
 
     await fetch(this.url,{
       method: 'POST',
@@ -51,7 +52,7 @@ export class HorarioService {
   }
 
   async deleteById(id: number){
-    fetch(`${this.url}${id}`,{
+    fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
       (response) => {
