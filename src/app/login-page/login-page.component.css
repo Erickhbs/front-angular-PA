@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-
 *{
     margin: 0;
     padding: 0;
@@ -29,7 +27,7 @@ main{
 }
 
 .container p{
-    font-size: 14px;
+    font-size: 18px;
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
@@ -41,16 +39,16 @@ main{
 
 .container a{
     color: #333;
-    font-size: 13px;
+    font-size: 18px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
 
 .container button{
-    background-color: gray;
+    background-color: black;
     color: #fff;
     font-size: 12px;
-    padding: 10px 45px;
+    padding: 15px 45px;
     border: 1px solid transparent;
     border-radius: 8px;
     font-weight: 600;
@@ -79,8 +77,8 @@ main{
     background-color: #eee;
     border: none;
     margin: 8px 0;
-    padding: 10px 15px;
-    font-size: 13px;
+    padding: 15px 15px;
+    font-size: 18px;
     border-radius: 8px;
     width: 100%;
     outline: none;

@@ -8,23 +8,65 @@ import { Servico } from '../dados/servico-data';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
-    <h1>Cadastrar serviço</h1>
-    <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-      <div class="form-floating">
-        <input type="text" id="input-nome" class="form-control" formControlName="inputNome" placeholder="Nome">
-        <label for="input-nome" class="form-label">Nome</label>
-      </div>
+  <main>
+    <div class="container" id="container" #containerRef>
+      <h1>Cadastrar Serviço</h1>
       <br>
-      <div class="form-floating">
-        <input type="text" id="input-preco" class="form-control" formControlName="inputPreco" placeholder="Preço">
-        <label for="input-preco" class="form-label">Preço</label>
+      <div class="content">
+        <div class="image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzncBmx8lePwoAmO6IPfGtBRpR5aSPIKuZxQ&s" alt="">
+        </div>
+        <div class="form-servico servico">
+          <form [formGroup]="aplicaForm" (ngSubmit)="submeterForm()" class="dadosServico">
+            <input type="text" formControlName="inputNome" name="nome" placeholder="Nome do Serviço">
+            <input type="number" formControlName="inputPreco" name="preco" placeholder="Preço do Serviço" min="1" step="any">
+            <br>
+            <button type="submit">Cadastrar</button>
+          </form>
+        </div>
       </div>
-      <br>
-      <button type="submit" class="btn btn-dark">Cadastrar</button>
-    </form>
+    </div>
+    <div class="popup">
+      <div class="popup-content">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaO0oyzmK6d5Z8s41Z7-YATYbByzTKRFIvhw&s" alt="Success Icon" class="popup-icon">
+        <p>Serviço cadastrado</p>
+      </div>
+    </div>
+  </main>
+
   `,
   styleUrl: './cadastrar-servico.component.css'
 })
+
+export class CadastrarServicoComponent {
+  servicoService = inject(ServicoService);
+  servico!: Servico;
+
+  aplicaForm = new FormGroup({
+    inputNome: new FormControl(''),
+    inputPreco: new FormControl(0)
+  });
+
+  submeterForm() {
+    const campos = this.aplicaForm.value;
+
+    this.servico = {
+      nome: campos.inputNome ?? '',
+      preco: campos.inputPreco ?? 0
+    };
+
+    this.servicoService.cadastrarServico(this.servico);
+    this.aplicaForm.reset({ inputNome: '', inputPreco: 0 });
+    
+    const popup = document.querySelector('.popup') as HTMLElement;
+    popup.classList.add('show-popup');
+    setTimeout(() => {
+      popup.classList.remove('show-popup');
+    }, 1800);
+  }
+}
+
+/*
 export class CadastrarServicoComponent {
   servicoService = inject(ServicoService);
   servico!: Servico;
@@ -45,3 +87,7 @@ export class CadastrarServicoComponent {
     this.servicoService.cadastrarServico(this.servico);
   }
 }
+
+
+
+*/
