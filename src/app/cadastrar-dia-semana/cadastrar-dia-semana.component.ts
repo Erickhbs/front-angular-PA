@@ -18,7 +18,7 @@ import { DiaSemanaService } from '../service/dia-semana.service';
         </div>
         <div class="form-diaSemana dia">
           <form [formGroup]="aplicaForm" (ngSubmit)="submeterForm()" class="diasemana">
-            <input type="text" formControlName="diaSemanaService" name="nome" placeholder="Nome do dia">
+            <input type="text" formControlName="inputDia" name="nome" placeholder="Nome do dia">
             <br>
             <button type="submit">Cadastrar</button>
           </form>
