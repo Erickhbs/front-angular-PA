@@ -26,7 +26,7 @@ export class LoginService {
         if(!response.ok){
           throw new Error('Erro ao logar!');
         }
-        
+
         return response;
       }
     );
