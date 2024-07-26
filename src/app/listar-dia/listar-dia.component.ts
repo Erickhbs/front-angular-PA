@@ -16,7 +16,7 @@ import { HorarioService } from '../service/horario.service';
     <div *ngFor="let d of diaSemanaList">
       <ul class="list-group">
         <li class="list-group-item">
-          Horários da {{ d.dia }}
+          Horários da {{ d.dia }} <button (click)="excluirDia( d.id! )">Excluir</button>
         </li>
         <ul>
           <li *ngFor="let h of d.horarios">
@@ -62,6 +62,7 @@ export class ListarDiaComponent {
     this.diaSemanaService.getDias().then(
       (dias: DiaSemana[]) => {
         this.diaSemanaList = dias;
+        console.log(dias);
       }
     );
 
@@ -74,8 +75,6 @@ export class ListarDiaComponent {
 
   async submeterForm(){
     await this.inicializarObjetos();
-
-    console.log(this.horarioForm);
 
     if(this.diaForm.horarios === undefined){
       this.diaForm.horarios = [];
@@ -92,5 +91,17 @@ export class ListarDiaComponent {
 
     this.diaForm = await this.diaSemanaService.getDiaById(campos.inputDia as string);
     this.horarioForm = await this.horarioService.getHorarioById(campos.inputHorario as string);
+  }
+
+  async excluirDia(id: string){
+    let obj;
+    for(let d of this.diaSemanaList){
+      if(d.id === id){
+        d.horarios = [];
+        obj = d;
+        await this.diaSemanaService.atualizarDia(obj);
+      }
+    }
+    await this.diaSemanaService.deleteById(id);
   }
 }

@@ -41,7 +41,6 @@ export class DiaSemanaService {
   }
 
   async atualizarDia(diaSemana: DiaSemana){
-    console.log(diaSemana);
     fetch(this.url,{
       method: 'PUT',
       headers: {
@@ -51,7 +50,7 @@ export class DiaSemanaService {
     });
   }
 
-  async deleteById(id: number){
+  async deleteById(id: string){
     fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
