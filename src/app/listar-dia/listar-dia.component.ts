@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { DiaSemanaService } from '../service/dia-semana.service';
 import { DiaSemana } from '../dados/dia-semana-data';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listar-dia',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
     <h1>Listagem de dias</h1>
     <div *ngFor="let d of diaSemanaList">
@@ -15,7 +16,7 @@ import { DiaSemana } from '../dados/dia-semana-data';
         </li>
         <ul>
           <li *ngFor="let h of d.horarios">
-            {{ h.horas }}:{{ h.minutos }}
+            {{ h.hora }}
           </li>
         </ul>
       </ul>

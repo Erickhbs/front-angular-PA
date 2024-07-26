@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ServicoService } from '../service/servico.service';
 import { Servico } from '../dados/servico-data';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-listar-servico',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
     <h1>Listagem de serviços</h1>
     <ul class="list-group">
