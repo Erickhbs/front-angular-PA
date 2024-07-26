@@ -41,6 +41,7 @@ export class DiaSemanaService {
   }
 
   async atualizarDia(diaSemana: DiaSemana){
+    console.log(diaSemana);
     fetch(this.url,{
       method: 'PUT',
       headers: {

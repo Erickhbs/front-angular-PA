@@ -12,6 +12,7 @@ import { HorarioService } from '../service/horario.service';
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <h1>Listagem de dias</h1>
+
     <div *ngFor="let d of diaSemanaList">
       <ul class="list-group">
         <li class="list-group-item">
@@ -23,10 +24,9 @@ import { HorarioService } from '../service/horario.service';
           </li>
         </ul>
       </ul>
-      <br><br>
     </div>
 
-    <h1>Adicionar horários</h1>
+    <h1>Disponibilizar horários</h1>
 
     <form [formGroup]="aplicaForm" (submit)="submeterForm()">
       <label for="dia-input">Dia da semana</label>
@@ -38,7 +38,7 @@ import { HorarioService } from '../service/horario.service';
       <select name="" id="horario-input" formControlName="inputHorario">
         <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.hora }}</option>
       </select>
-      <button type="submit">Adicionar horário</button>
+      <button type="submit">Disponibilizar horário</button>
     </form>
   `,
   styleUrl: './listar-dia.component.css'
@@ -72,11 +72,18 @@ export class ListarDiaComponent {
     );
   }
 
-  submeterForm(){
-    this.inicializarObjetos();
+  async submeterForm(){
+    await this.inicializarObjetos();
 
-    this.diaForm.horarios?.push(this.horarioForm);
+    console.log(this.horarioForm);
 
+    if(this.diaForm.horarios === undefined){
+      this.diaForm.horarios = [];
+      this.diaForm.horarios.push(this.horarioForm);
+    }else{
+      this.diaForm.horarios.push(this.horarioForm);
+    }
+    
     this.diaSemanaService.atualizarDia(this.diaForm);
   }
 
