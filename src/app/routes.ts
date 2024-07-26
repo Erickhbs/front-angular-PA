@@ -6,6 +6,9 @@ import { HomeComponent } from "./home/home.component";
 import { CadastrarAgendamentoComponent } from "./cadastrar-agendamento/cadastrar-agendamento.component";
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { ListarHorarioComponent } from "./listar-horario/listar-horario.component";
+import { ListarServicoComponent } from "./listar-servico/listar-servico.component";
+import { ListarDiaComponent } from "./listar-dia/listar-dia.component";
+import { ListarAgendamentoComponent } from "./listar-agendamento/listar-agendamento.component";
 
 const routeConfig: Routes = [
     
@@ -38,6 +41,21 @@ const routeConfig: Routes = [
         path: 'listar-horario',
         component: ListarHorarioComponent,
         title: 'Listagem de Horários'
+    },
+    {
+        path: 'listar-servico',
+        component: ListarServicoComponent,
+        title: 'Listagem de Serviços'
+    },
+    {
+        path: 'listar-dia',
+        component: ListarDiaComponent,
+        title: 'Listagem de Dias'
+    },
+    {
+        path: 'listar-agendamento',
+        component: ListarAgendamentoComponent,
+        title: 'Listagem de Agendamentos'
     },
     {
         path: 'login-page',

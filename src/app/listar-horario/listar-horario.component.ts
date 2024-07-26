@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <h1>Listagem de horários</h1>
     <ul class="list-group">
-      <li *ngFor="let h of horarioList" class="list-group-item">{{ h.horas }}:{{ h.minutos }}</li>
+      <li *ngFor="let h of horarioList" class="list-group-item">{{ h.hora }}</li>
     </ul>
   `,
   styleUrl: './listar-horario.component.css'
