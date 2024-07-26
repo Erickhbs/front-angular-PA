@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
 export class ListarAgendamentoComponent {
   agendamentoService = inject(AgendamentoService);
   agendamentoList!: Agendamento[];
-
+  
   constructor(){
     this.agendamentoService.getAgendamentos().then(
       (agendamentos: Agendamento[]) => {

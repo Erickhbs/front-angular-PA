@@ -8,21 +8,22 @@ export class HorarioService {
   readonly url = 'http://localhost:8080/horario'
   horario!: Horario;
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   async getHorarios(): Promise<Horario[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getHorarioById(id: number): Promise<Horario>{
+  async getHorarioById(id: string): Promise<Horario>{
     const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
   async cadastrarHorario(horario: Horario){
     const token = localStorage.getItem('token');
-    console.log(horario)
 
     await fetch(this.url,{
       method: 'POST',
