@@ -14,26 +14,30 @@ import { AgendamentoService } from '../service/agendamento.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
-    <h1>Agendar atendimento</h1>
+  <main>
+    <div class="container">
+      <h1>Agendar atendimento</h1>
+      <form [formGroup]="aplicaForm" (submit)="submeterForm()">
+        <label for="input-dia">Dia</label><br>
+        <select id="input-dia" formControlName="inputDia" class="form-select" aria-label="Default select example">
+          <option *ngFor="let d of diaList" value="{{ d.id }}">{{ d.dia }}</option>
+        </select><br>form-floating
 
-    <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-      <label for="input-dia">Dia</label><br>
-      <select id="input-dia" formControlName="inputDia" class="form-select" aria-label="Default select example">
-        <option *ngFor="let d of diaList" value="{{ d.id }}">{{ d.dia }}</option>
-      </select><br>form-floating
+        <label for="input-horario">Horário</label><br>
+        <select id="input-horario" formControlName="inputHorario" class="form-select" aria-label="Default select example">
+          <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.horas }}:{{ h.minutos }}</option>
+        </select><br>
 
-      <label for="input-horario">Horário</label><br>
-      <select id="input-horario" formControlName="inputHorario" class="form-select" aria-label="Default select example">
-        <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.horas }}:{{ h.minutos }}</option>
-      </select><br>
+        <label for="input-servico">Serviço</label><br>
+        <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
+          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }}</option>
+        </select><br>
 
-      <label for="input-servico">Serviço</label><br>
-      <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
-        <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }}</option>
-      </select><br>
-
-      <button type="submit" class="btn btn-dark">Agendar</button>
-    </form>
+        <button type="submit" class="btn btn-dark">Agendar</button>
+      </form>
+    </div>
+  </main>
+    
   `,
   styleUrl: './cadastrar-agendamento.component.css'
 })
