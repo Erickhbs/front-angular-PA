@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ServicoService } from '../service/servico.service';
 import { Servico } from '../dados/servico-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-servico',
@@ -20,6 +21,7 @@ import { Servico } from '../dados/servico-data';
           <form [formGroup]="aplicaForm" (ngSubmit)="submeterForm()" class="dadosServico">
             <input type="text" formControlName="inputNome" name="nome" placeholder="Nome do Serviço">
             <input type="number" formControlName="inputPreco" name="preco" placeholder="Preço do Serviço" min="1" step="any">
+            <input type="url" formControlName="inputFoto" name="foto" placeholder="Link de imagem">
             <br>
             <button type="submit">Cadastrar</button>
           </form>
@@ -41,18 +43,25 @@ import { Servico } from '../dados/servico-data';
 export class CadastrarServicoComponent {
   servicoService = inject(ServicoService);
   servico!: Servico;
+  router: Router;
 
   aplicaForm = new FormGroup({
     inputNome: new FormControl(''),
-    inputPreco: new FormControl(0)
+    inputPreco: new FormControl(),
+    inputFoto: new FormControl('')
   });
+
+  constructor(router: Router){
+    this.router = router;
+  }
 
   submeterForm() {
     const campos = this.aplicaForm.value;
 
     this.servico = {
       nome: campos.inputNome ?? '',
-      preco: campos.inputPreco ?? 0
+      preco: campos.inputPreco ?? 0,
+      linkFoto: campos.inputFoto ?? ''
     };
 
     this.servicoService.cadastrarServico(this.servico);
@@ -63,6 +72,8 @@ export class CadastrarServicoComponent {
     setTimeout(() => {
       popup.classList.remove('show-popup');
     }, 1800);
+
+    this.router.navigate(['listar-servico']);
   }
 }
 

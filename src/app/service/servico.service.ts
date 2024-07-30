@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Servico } from '../dados/servico-data';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,11 @@ import { Servico } from '../dados/servico-data';
 export class ServicoService {
   readonly url = 'http://localhost:8080/servico'
   servicoResponse!: Servico;
+  router: Router;
 
-  constructor() { }
+  constructor(router: Router) {
+    this.router = router;
+  }
 
   async getServicos(): Promise<Servico[]>{
     const data = await fetch(this.url);
@@ -37,7 +41,7 @@ export class ServicoService {
         }
       }
     );
-    //this.router.navigate(['']);
+    this.router.navigate(['listar-servico']);
   }
 
   async atualizarServico(servico: Servico){
@@ -50,7 +54,7 @@ export class ServicoService {
     });
   }
 
-  async deleteById(id: number){
+  async deleteById(id: string){
     fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
@@ -60,6 +64,8 @@ export class ServicoService {
           throw new Error('Erro ao deletar serviço')
         }
       }
-    )
+    );
+
+    window.location.reload();
   }
 }

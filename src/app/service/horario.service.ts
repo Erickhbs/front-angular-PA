@@ -39,7 +39,6 @@ export class HorarioService {
         }
       }
     );
-    //this.router.navigate(['']);
   }
 
   async atualizarHorario(horario: Horario){
@@ -52,7 +51,7 @@ export class HorarioService {
     });
   }
 
-  async deleteById(id: number){
+  async deleteById(id: string){
     fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(

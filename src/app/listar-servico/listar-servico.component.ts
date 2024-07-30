@@ -9,11 +9,14 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <h1>Listagem de serviços</h1>
-    <ul class="list-group">
-      <li *ngFor="let s of servicoList" class="list-group-item">
-        {{ s.nome }} R$ {{ s.preco }}
-      </li>
-    </ul>
+    <div *ngFor="let s of servicoList" class="card" style="width: 18rem;">
+      <img src="{{ s.linkFoto }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ s.nome }}</h5>
+        <p class="card-text">R$ {{ s.preco }}</p>
+        <a (click)="removerServico( s.id! )" href="#" class="btn btn-dark">Excluir</a>
+      </div>
+    </div>
   `,
   styleUrl: './listar-servico.component.css'
 })
@@ -27,5 +30,9 @@ export class ListarServicoComponent {
         this.servicoList = servicos;
       }
     )
+  }
+
+  removerServico(id: string){
+    this.servicoService.deleteById(id);
   }
 }

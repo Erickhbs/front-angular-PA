@@ -13,18 +13,17 @@ import { HorarioService } from '../service/horario.service';
   template: `
     <h1>Listagem de dias</h1>
 
-    <div *ngFor="let d of diaSemanaList">
-      <ul class="list-group">
-        <li class="list-group-item">
-          Horários da {{ d.dia }} <button (click)="excluirDia( d.id! )">Excluir</button>
+    <a *ngFor="let d of diaSemanaList" href="#" class="list-group-item list-group-item-action">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ d.dia }}</h5>
+      </div>
+      <ul class="mb-1">
+        <li *ngFor="let h of d.horarios" class="btn btn-light">
+          {{ h.hora }}
         </li>
-        <ul>
-          <li *ngFor="let h of d.horarios">
-            {{ h.hora }}
-          </li>
-        </ul>
       </ul>
-    </div>
+      <button (click)="excluirDia( d.id! )" class="btn btn-outline-danger">Excluir</button>
+    </a>
 
     <h1>Disponibilizar horários</h1>
 

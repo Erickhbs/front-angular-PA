@@ -29,7 +29,7 @@ import { Router } from '@angular/router';
 })
 export class CadastrarHorarioComponent {
   horarioService = inject(HorarioService);
-  router: Router;  
+  router: Router;
 
   aplicaForm = new FormGroup({
     inputHorario: new FormControl()
@@ -48,7 +48,7 @@ export class CadastrarHorarioComponent {
     } else {
       alert('Por favor, escolha um horário entre 07:00 e 22:00.');
     }
-    this.router.navigate(['listar-horario'])
+    this.router.navigate(['listar-horario']);
   }
 
   validarHorario(horario: string): boolean {

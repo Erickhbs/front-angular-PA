@@ -4,5 +4,6 @@ export interface Servico {
     id?: string;
     nome: string;
     preco: number;
+    linkFoto: string;
     dias?: DiaSemana[];
 }
