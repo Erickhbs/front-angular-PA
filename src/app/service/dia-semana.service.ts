@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DiaSemana } from '../dados/dia-semana-data';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,11 @@ import { DiaSemana } from '../dados/dia-semana-data';
 export class DiaSemanaService {
   readonly url = 'http://localhost:8080/dia'
   diaSemana!: DiaSemana;
+  router: Router;
 
-  constructor() { }
+  constructor(router: Router) {
+    this.router = router;
+  }
 
   async getDias(): Promise<DiaSemana[]>{
     const data = await fetch(this.url);
@@ -37,7 +41,7 @@ export class DiaSemanaService {
         }
       }
     );
-    //this.router.navigate(['']);
+    this.router.navigate(['listar-dia']);
   }
 
   async atualizarDia(diaSemana: DiaSemana){
@@ -51,7 +55,7 @@ export class DiaSemanaService {
   }
 
   async deleteById(id: string){
-    fetch(`${this.url}/${id}`,{
+    return fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(
       (response) => {

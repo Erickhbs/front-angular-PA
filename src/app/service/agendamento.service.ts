@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Agendamento } from '../dados/agendamento-data';
+import { AgendamentoRequest, AgendamentoResponse } from '../dados/agendamento-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AgendamentoService {
   readonly url = 'http://localhost:8080/agendamento'
-  agendamento!: Agendamento;
+  agendamentoRequest!: AgendamentoRequest;
 
   constructor() { }
 
-  async getAgendamentos(): Promise<Agendamento[]>{
+  async getAgendamentos(): Promise<AgendamentoResponse[]>{
     const data = await fetch(this.url);
     return await data.json() ?? [];
   }
 
-  async getAgendamentoById(id: number): Promise<Agendamento>{
+  async getAgendamentoById(id: number): Promise<AgendamentoResponse>{
     const data = await fetch(`${this.url}/${id}`);
     return await data.json();
   }
 
-  async cadastrarAgendamento(agendamento: Agendamento){
+  async cadastrarAgendamento(agendamentoRequest: AgendamentoRequest){
+    console.log(agendamentoRequest);
+
     const token = localStorage.getItem('token');
 
     await fetch(this.url,{
@@ -29,7 +31,7 @@ export class AgendamentoService {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
-      body: JSON.stringify(agendamento),
+      body: JSON.stringify(agendamentoRequest),
     }).then(
       (response) => {
         if(!response.ok){
@@ -40,13 +42,13 @@ export class AgendamentoService {
     //this.router.navigate(['']);
   }
 
-  async atualizarAgendamento(agendamento: Agendamento){
+  async atualizarAgendamento(agendamentoRequest: AgendamentoRequest){
     fetch(this.url,{
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(agendamento)
+      body: JSON.stringify(agendamentoRequest)
     });
   }
 

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HorarioService } from '../service/horario.service';
 import { Horario } from '../dados/horario-data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-horario',
@@ -27,11 +28,16 @@ import { Horario } from '../dados/horario-data';
   styleUrls: ['./cadastrar-horario.component.css']
 })
 export class CadastrarHorarioComponent {
-  horarioService = inject(HorarioService);  
+  horarioService = inject(HorarioService);
+  router: Router;  
 
   aplicaForm = new FormGroup({
     inputHorario: new FormControl()
   });
+
+  constructor(router: Router){
+    this.router = router;
+  }
 
   submeterForm() {
     const campoHorario = this.aplicaForm.value.inputHorario;
@@ -42,6 +48,7 @@ export class CadastrarHorarioComponent {
     } else {
       alert('Por favor, escolha um horário entre 07:00 e 22:00.');
     }
+    this.router.navigate(['listar-horario'])
   }
 
   validarHorario(horario: string): boolean {

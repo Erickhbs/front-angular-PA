@@ -1,4 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DiaSemanaService } from '../service/dia-semana.service';
 import { HorarioService } from '../service/horario.service';
@@ -6,26 +7,27 @@ import { ServicoService } from '../service/servico.service';
 import { DiaSemana } from '../dados/dia-semana-data';
 import { Horario } from '../dados/horario-data';
 import { Servico } from '../dados/servico-data';
-import { Agendamento } from '../dados/agendamento-data';
+import { AgendamentoRequest } from '../dados/agendamento-data';
 import { AgendamentoService } from '../service/agendamento.service';
+import { Navigation } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-agendamento',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   template: `
   <main>
     <div class="container">
       <h1>Agendar atendimento</h1>
       <form [formGroup]="aplicaForm" (submit)="submeterForm()">
         <label for="input-dia">Dia</label><br>
-        <select id="input-dia" formControlName="inputDia" class="form-select" aria-label="Default select example">
+        <select id="input-dia" formControlName="inputDia" class="form-select" aria-label="Default select example" (change)="carregarHorariosDisponiveis()">
           <option *ngFor="let d of diaList" value="{{ d.id }}">{{ d.dia }}</option>
-        </select><br>form-floating
+        </select><br>
 
-        <label for="input-horario">Horário</label><br>
-        <select id="input-horario" formControlName="inputHorario" class="form-select" aria-label="Default select example">
-          <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.horas }}:{{ h.minutos }}</option>
+        <label *ngIf="diaSelecionado" for="input-horario">Horário</label><br>
+        <select *ngIf="diaSelecionado" id="input-horario" formControlName="inputHorario" class="form-select" aria-label="Default select example">
+          <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.hora }}</option>
         </select><br>
 
         <label for="input-servico">Serviço</label><br>
@@ -46,15 +48,13 @@ export class CadastrarAgendamentoComponent {
   diaService = inject(DiaSemanaService);
   horarioService = inject(HorarioService);
   servicoService = inject(ServicoService);
+  diaSelecionado = false;
 
   diaList!: DiaSemana[];
   horarioList!: Horario[];
   servicoList!: Servico[];
 
-  agendamento!: Agendamento;
-  dia!: DiaSemana;
-  horario!: Horario;
-  servico!: Servico;
+  agendamento!: AgendamentoRequest;
   
   aplicaForm = new FormGroup({
     inputDia: new FormControl(''),
@@ -69,12 +69,6 @@ export class CadastrarAgendamentoComponent {
       }
     )
 
-    this.horarioService.getHorarios().then(
-      (horarios: Horario[]) => {
-        this.horarioList = horarios;
-      }
-    )
-
     this.servicoService.getServicos().then(
       (servicos: Servico[]) => {
         this.servicoList = servicos;
@@ -85,33 +79,25 @@ export class CadastrarAgendamentoComponent {
   submeterForm(){
     const campos = this.aplicaForm.value;
 
-    for(let d of this.diaList){
-      if(d.id == campos.inputDia){
-        this.dia = d;
-        break;
-      }
-    }
-    
-    for(let h of this.horarioList){
-      if(h.id == campos.inputHorario){
-        this.horario = h;
-        break;
-      }
-    }
-
-    for(let s of this.servicoList){
-      if(s.id == campos.inputServico){
-        this.servico = s;
-        break;
-      }
-    }
-
     this.agendamento = {
-      dia: this.dia,
-      horario: this.horario,
-      servico: this.servico
-    }
+      dia: campos.inputDia!,
+      horario: campos.inputHorario!,
+      servico: campos.inputServico!
+    };
+
+    
 
     this.agendamentoService.cadastrarAgendamento(this.agendamento);
+  }
+
+  carregarHorariosDisponiveis(){
+    let campos = this.aplicaForm.value;
+    let [horariosDoDia] = this.diaList.filter(
+      diaList => diaList.id == campos.inputDia
+    );
+
+    this.horarioList = horariosDoDia.horarios!;
+
+    this.diaSelecionado = true;
   }
 }

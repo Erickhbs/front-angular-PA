@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DiaSemanaService } from '../service/dia-semana.service';
 import { DiaSemana } from '../dados/dia-semana-data';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Horario } from '../dados/horario-data';
 import { HorarioService } from '../service/horario.service';
@@ -58,11 +58,11 @@ export class ListarDiaComponent {
     inputHorario: new FormControl('')
   });
 
+
   constructor(){
     this.diaSemanaService.getDias().then(
       (dias: DiaSemana[]) => {
         this.diaSemanaList = dias;
-        console.log(dias);
       }
     );
 
@@ -84,6 +84,7 @@ export class ListarDiaComponent {
     }
     
     this.diaSemanaService.atualizarDia(this.diaForm);
+    window.location.reload();
   }
 
   async inicializarObjetos(){
@@ -94,14 +95,13 @@ export class ListarDiaComponent {
   }
 
   async excluirDia(id: string){
-    let obj;
     for(let d of this.diaSemanaList){
       if(d.id === id){
         d.horarios = [];
-        obj = d;
-        await this.diaSemanaService.atualizarDia(obj);
+        await this.diaSemanaService.atualizarDia(d);
       }
     }
     await this.diaSemanaService.deleteById(id);
+    window.location.reload();
   }
 }
