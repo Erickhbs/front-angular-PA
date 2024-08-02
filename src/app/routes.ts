@@ -9,6 +9,7 @@ import { ListarHorarioComponent } from "./listar-horario/listar-horario.componen
 import { ListarServicoComponent } from "./listar-servico/listar-servico.component";
 import { ListarDiaComponent } from "./listar-dia/listar-dia.component";
 import { ListarAgendamentoComponent } from "./listar-agendamento/listar-agendamento.component";
+import { ListarAgendamentoClienteComponent } from "./listar-agendamento-cliente/listar-agendamento-cliente.component";
 
 const routeConfig: Routes = [
     
@@ -55,6 +56,11 @@ const routeConfig: Routes = [
     {
         path: 'listar-agendamento',
         component: ListarAgendamentoComponent,
+        title: 'Listagem de Agendamentos'
+    },
+    {
+        path: 'listar-meus-agendamentos',
+        component: ListarAgendamentoClienteComponent,
         title: 'Listagem de Agendamentos'
     },
     {

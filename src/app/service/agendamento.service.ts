@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AgendamentoRequest, AgendamentoResponse } from '../dados/agendamento-data';
+import { Usuario } from '../dados/usuario-data';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,11 @@ export class AgendamentoService {
 
   async getAgendamentoById(id: number): Promise<AgendamentoResponse>{
     const data = await fetch(`${this.url}/${id}`);
+    return await data.json();
+  }
+
+  async getAgendamentoByUsuario(token: string): Promise<AgendamentoResponse[]>{
+    const data = await fetch(`${this.url}/meus-agendamentos/${token}`);
     return await data.json();
   }
 
