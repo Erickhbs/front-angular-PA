@@ -1,0 +1,9 @@
+#cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#cards div{
+    margin: 1em;
+}

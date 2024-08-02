@@ -9,13 +9,16 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <h1>Listagem de serviços</h1>
-    <div *ngFor="let s of servicoList" class="card" style="width: 18rem;">
-      <img src="{{ s.linkFoto }}" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{ s.nome }}</h5>
-        <p class="card-text">R$ {{ s.preco }}</p>
+    <div id="cards">
+      <div *ngFor="let s of servicoList" class="card" style="width: 18rem;">
+        <img src="{{ s.linkFoto }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ s.nome }}</h5>
+          <p class="card-text">R$ {{ s.preco }}</p>
+        </div>
       </div>
     </div>
+    
   `,
   styleUrl: './home.component.css'
 })

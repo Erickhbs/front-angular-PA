@@ -9,7 +9,6 @@ import { Horario } from '../dados/horario-data';
 import { Servico } from '../dados/servico-data';
 import { AgendamentoRequest } from '../dados/agendamento-data';
 import { AgendamentoService } from '../service/agendamento.service';
-import { Navigation } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-agendamento',
@@ -77,15 +76,15 @@ export class CadastrarAgendamentoComponent {
   }
 
   submeterForm(){
+    const token = localStorage.getItem('token');
     const campos = this.aplicaForm.value;
 
     this.agendamento = {
       dia: campos.inputDia!,
       horario: campos.inputHorario!,
-      servico: campos.inputServico!
+      servico: campos.inputServico!,
+      usuario: token as string
     };
-
-    
 
     this.agendamentoService.cadastrarAgendamento(this.agendamento);
   }

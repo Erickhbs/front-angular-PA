@@ -9,10 +9,25 @@ import { CommonModule } from '@angular/common';
   imports: [ CommonModule ],
   template: `
   <h1>Listagem de agendamentos</h1>
-  <ul *ngFor="let a of agendamentoList" class="list-group">
-    <li class="list-group-item">Agendamento {{ a.dia.dia }}  {{ a.horario.hora }}</li>
-    <li class="list-group-item">{{ a.servico.nome }} R$ {{ a.servico.preco }}</li>
-  </ul>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Cliente</th>
+        <th scope="col">Dia</th>
+        <th scope="col">Horário</th>
+        <th scope="col">Serviço</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of agendamentoList">
+        <td>{{ a.usuario.name }}</td>
+        <td>{{ a.dia.dia }}</td>
+        <td>{{ a.horario.hora }}</td>
+        <td>{{ a.servico.nome }}</td>
+      </tr>
+    </tbody>
+  </table>
   `,
   styleUrl: './listar-agendamento.component.css'
 })
