@@ -1,44 +1,37 @@
 import { Component, inject } from '@angular/core';
-import { DiaSemanaService } from '../service/dia-semana.service';
-import { DiaSemana } from '../dados/dia-semana-data';
-import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Horario } from '../dados/horario-data';
+import { DiaSemanaService } from '../service/dia-semana.service';
 import { HorarioService } from '../service/horario.service';
+import { CommonModule } from '@angular/common';
+import { DiaSemana } from '../dados/dia-semana-data';
+import { Horario } from '../dados/horario-data';
 
 @Component({
-  selector: 'app-listar-dia',
+  selector: 'app-disponibilizar-horarios',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <div class="container">
-      <h1>Listagem de dias</h1>
+      <h1>Disponibilizar horários</h1>
 
-      <div *ngFor="let d of diaSemanaList" href="#">
-        <div>
-          <h5 class="mb-1">{{ d.dia }}</h5>
-        </div>
-        <ul class="mb-1" *ngIf="d.horarios != null">
-          <li *ngFor="let h of d.horarios" class="btn btn-light">
-            {{ h.hora }}
-          </li>
-        </ul>
-        <div *ngIf="d.horarios == undefined" class="alert alert-secondary" role="alert">
-          Você não disponibilizou horários neste dia ainda
-        </div>
-
+      <form [formGroup]="aplicaForm" (submit)="submeterForm()">
+        <label for="dia-input">Dia da semana</label>
+        <select name="" id="dia-input" formControlName="inputDia">
+          <option *ngFor="let d of diaSemanaList" value="{{ d.id }}">{{ d.dia }}</option>
+        </select>
         <br>
-
-        <button (click)="excluirDia( d.id! )" class="btn btn-outline-danger">Excluir dia</button>
-      </div>
-
-      <br><br>
-      <span class="obs">Para disponibilizar horários, acesse: <a href="disponibilizar-horarios">disponibilizar horários</a>.</span>
+        <label for="horario-input">Horario</label>
+        <select name="" id="horario-input" formControlName="inputHorario">
+          <option *ngFor="let h of horarioList" value="{{ h.id }}">{{ h.hora }}</option>
+        </select>
+        <br>
+        <button type="submit">Disponibilizar horário</button>
+      </form>
     </div>
   `,
-  styleUrl: './listar-dia.component.css'
+  styleUrl: './disponibilizar-horarios.component.css'
 })
-export class ListarDiaComponent {
+export class DisponibilizarHorariosComponent {
   diaSemanaService = inject(DiaSemanaService);
   horarioService = inject(HorarioService);
 
@@ -52,7 +45,6 @@ export class ListarDiaComponent {
     inputDia: new FormControl(''),
     inputHorario: new FormControl('')
   });
-
 
   constructor(){
     this.diaSemanaService.getDias().then(
@@ -87,16 +79,5 @@ export class ListarDiaComponent {
 
     this.diaForm = await this.diaSemanaService.getDiaById(campos.inputDia as string);
     this.horarioForm = await this.horarioService.getHorarioById(campos.inputHorario as string);
-  }
-
-  async excluirDia(id: string){
-    for(let d of this.diaSemanaList){
-      if(d.id === id){
-        d.horarios = [];
-        await this.diaSemanaService.atualizarDia(d);
-      }
-    }
-    await this.diaSemanaService.deleteById(id);
-    window.location.reload();
   }
 }

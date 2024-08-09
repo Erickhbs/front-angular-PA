@@ -8,10 +8,12 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <h1>Listagem de horários</h1>
-    <ul class="list-group">
-      <li *ngFor="let h of horarioList" class="list-group-item">{{ h.hora }}</li>
-    </ul>
+    <div class="container">
+      <h1>Listagem de horários</h1>
+      <ul class="list-group">
+        <li *ngFor="let h of horarioList" class="list-group-item">{{ h.hora }} <a href="#" (click)="excluirHorario( h.id! )">Excluir horário</a> </li>
+      </ul>
+    </div>
   `,
   styleUrl: './listar-horario.component.css'
 })
@@ -25,5 +27,9 @@ export class ListarHorarioComponent {
         this.horarioList = horarios;
       }
     )
+  }
+
+  async excluirHorario(id: string){
+    await this.horarioService.deleteById(id);
   }
 }

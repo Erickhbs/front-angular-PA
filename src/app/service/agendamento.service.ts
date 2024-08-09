@@ -58,7 +58,7 @@ export class AgendamentoService {
     });
   }
 
-  async deleteById(id: number){
+  async deleteById(id: string){
     fetch(`${this.url}/${id}`,{
       method: 'DELETE',
     }).then(

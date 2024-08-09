@@ -4,6 +4,7 @@ import { Register } from '../dados/register-data';
 import { LoginRequest, LoginResponse } from '../dados/login-data';
 import { RegisterService } from '../service/register.service';
 import { LoginService } from '../service/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -69,7 +70,11 @@ export class LoginPageComponent {
     inputSenha: new FormControl('')
   });
 
-  constructor(private renderer: Renderer2) {}
+  router: Router;
+
+  constructor(private renderer: Renderer2, router: Router) {
+    this.router = router;
+  }
 
   register(){
     const campos = this.aplicaFormRegister.value;
@@ -94,6 +99,8 @@ export class LoginPageComponent {
 
     this.loginResponse = await this.loginService.logar(this.loginRequest);
     localStorage.setItem('token', this.loginResponse.token);
+
+    this.router.navigate([''])
   }
 
   toggleContainer(isRegister: boolean) {

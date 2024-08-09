@@ -9,6 +9,7 @@ import { Horario } from '../dados/horario-data';
 import { Servico } from '../dados/servico-data';
 import { AgendamentoRequest } from '../dados/agendamento-data';
 import { AgendamentoService } from '../service/agendamento.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-agendamento',
@@ -31,7 +32,7 @@ import { AgendamentoService } from '../service/agendamento.service';
 
         <label for="input-servico">Serviço</label><br>
         <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
-          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }}</option>
+          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }} {{ s.preco }}</option>
         </select><br>
 
         <button type="submit" class="btn btn-dark">Agendar</button>
@@ -61,7 +62,11 @@ export class CadastrarAgendamentoComponent {
     inputServico: new FormControl('')
   });
 
-  constructor(){
+  router: Router;
+
+  constructor(router: Router){
+    this.router = router;
+
     this.diaService.getDias().then(
       (dias: DiaSemana[]) => {
         this.diaList = dias;
@@ -87,6 +92,8 @@ export class CadastrarAgendamentoComponent {
     };
 
     this.agendamentoService.cadastrarAgendamento(this.agendamento);
+
+    this.router.navigate([''])
   }
 
   carregarHorariosDisponiveis(){

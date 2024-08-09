@@ -24,12 +24,22 @@ export class LoginService {
     }).then(
       (response) => {
         if(!response.ok){
+          if(response.status >= 500){
+            alert("Email não localizado");
+          }
+
+          if(response.status < 500 && response.status >= 400){
+            alert("Senha incorreta")
+          }
+          
           throw new Error('Erro ao logar!');
         }
 
         return response;
       }
     );
+
+    alert("Login efetuado com sucesso")
 
     return await data.json();
   }

@@ -10,6 +10,7 @@ import { ListarServicoComponent } from "./listar-servico/listar-servico.componen
 import { ListarDiaComponent } from "./listar-dia/listar-dia.component";
 import { ListarAgendamentoComponent } from "./listar-agendamento/listar-agendamento.component";
 import { ListarAgendamentoClienteComponent } from "./listar-agendamento-cliente/listar-agendamento-cliente.component";
+import { DisponibilizarHorariosComponent } from "./disponibilizar-horarios/disponibilizar-horarios.component";
 
 const routeConfig: Routes = [
     
@@ -37,6 +38,11 @@ const routeConfig: Routes = [
         path: 'cadastro-agendamento',
         component: CadastrarAgendamentoComponent,
         title: 'Página de agendamento'
+    },
+    {
+        path: 'disponibilizar-horarios',
+        component: DisponibilizarHorariosComponent,
+        title: 'Disponibilizar horários'
     },
     {
         path: 'listar-horario',
