@@ -48,7 +48,6 @@ export class CadastrarHorarioComponent {
     } else {
       alert('Por favor, escolha um horário entre 07:00 e 22:00.');
     }
-    this.router.navigate(['listar-horario']);
   }
 
   validarHorario(horario: string): boolean {
@@ -56,78 +55,3 @@ export class CadastrarHorarioComponent {
     return horas >= 7 && horas <= 22;
   }
 }
-
-/*
-<h1>Cadastro de Horário</h1>
-    <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-      <div class="form-floating">
-        <input type="number" id="input-hora" class="form-control" formControlName="inputHoras" placeholder="Hora">
-        <label for="input-hora" class="form-label">Hora</label>
-      </div>
-      <br>
-      <div class="form-floating">
-        <input type="number" id="input-minuto" class="form-control" formControlName="inputMinutos" placeholder="Minuto">
-        <label for="input-minuto" class="form-label">Minuto</label>
-      </div>
-      <br>
-      <button type="submit" class="btn btn-dark">Cadastrar</button>
-    </form>
-
-export class CadastrarHorarioComponent {
-  horarioService = inject(HorarioService);
-  horario!: Horario; 
-  
-  aplicaForm = new FormGroup({
-    inputHoras: new FormControl(),
-    inputMinutos: new FormControl()
-  });
-
-  submeterForm(){
-    const campos = this.aplicaForm.value;
-
-    this.horario = {
-      horas: campos.inputHoras as number,
-      minutos: campos.inputMinutos as number,
-    }
-
-    this.horarioService.cadastrarHorario(this.horario)
-  }
-}
-
-
-
-
- <select class="timer-piker--select">
-          <option value="01">01</option>
-        </select>
-        :
-        <select class="timer-piker--select">
-          <option value="05">05</option>
-        </select>
-
-
-
-
-
-        export class CadastrarHorarioComponent {
-  horarioService = inject(HorarioService);  
-  horario!: Horario; 
-  
-  aplicaForm = new FormGroup({
-    inputHoras: new FormControl(),
-    inputMinutos: new FormControl()
-  });
-
-  submeterForm(){
-    const campos = this.aplicaForm.value;
-
-    this.horario = {
-      horas: campos.inputHoras as number,
-      minutos: campos.inputMinutos as number,
-    }
-
-    this.horarioService.cadastrarHorario(this.horario)
-  }
-}
-
-*/

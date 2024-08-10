@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
 
         <label for="input-servico">Serviço</label><br>
         <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
-          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }} {{ s.preco }}</option>
+          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }} R$ {{ s.preco }}</option>
         </select><br>
 
         <button type="submit" class="btn btn-dark">Agendar</button>
