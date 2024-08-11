@@ -1,0 +1,14 @@
+label{
+    cursor: pointer;
+    padding: .5em;
+    margin: .1em;
+    border-radius: .5em;
+    border: 1px solid black;
+    user-select: none;
+}
+input[type=checkbox]:checked ~ label{
+    background-color: aqua;
+}
+input[type=checkbox]{
+    display: none;
+}
