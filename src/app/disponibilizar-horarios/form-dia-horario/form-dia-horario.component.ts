@@ -12,7 +12,7 @@ import { DiaSemanaService } from '../../service/dia-semana.service';
   template: `
     <form [formGroup]="aplicaForm" (ngSubmit)="submeterForm()">
       <h3>Dias da semana</h3>
-      <div formGroupName="dias">
+      <div formGroupName="dias" class="botoes">
         <div *ngFor="let d of dias">
           <input type="checkbox" id="{{ d.id }}" [formControlName]="d.id!">
           <label for="{{ d.id }}">
@@ -23,7 +23,7 @@ import { DiaSemanaService } from '../../service/dia-semana.service';
       </div>
 
       <h3>Horários</h3>
-      <div formGroupName="horarios">
+      <div formGroupName="horarios" class="botoes">
         <div *ngFor="let h of horarios">
           <input type="checkbox" id="{{ h.id }}" [formControlName]="h.id!"> 
           <label for="{{ h.id }}">
@@ -33,7 +33,7 @@ import { DiaSemanaService } from '../../service/dia-semana.service';
         </div>
       </div>
 
-      <button type="submit">Adicionar horários</button>
+      <button type="submit" class="btn btn-secondary">Adicionar horários</button>
     </form>
   `,
   styleUrls: ['./form-dia-horario.component.css']

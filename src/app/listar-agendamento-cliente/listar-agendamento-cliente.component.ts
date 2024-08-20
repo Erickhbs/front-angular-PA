@@ -27,7 +27,33 @@ import { CommonModule } from '@angular/common';
             <td>{{ a.dia.dia }}</td>
             <td>{{ a.horario.hora }}</td>
             <td>{{ a.servico.nome }}</td>
-            <td><button type="button" class="btn btn-danger" (click)="cancelar(a.id!)">Cancelar</button></td>
+            <td>
+
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Cancelar agendamento
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      Tem certeza que quer cancelar o agendamento?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" class="btn btn-danger" (click)="cancelar(a.id!)">Cancelar agendamento</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </td>
           </tr>
         </tbody>
       </table>
@@ -52,9 +78,7 @@ export class ListarAgendamentoClienteComponent {
   }
 
   async cancelar(id: string){
-    if(window.confirm("Quer mesmo cancelar o agendamento?")){
-      await this.agendamentoService.deleteById(id);
-      window.location.reload();
-    }
+    await this.agendamentoService.deleteById(id);
+    window.location.reload();
   }
 }
