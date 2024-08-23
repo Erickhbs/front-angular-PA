@@ -19,6 +19,11 @@ export class DiaSemanaService {
     return await data.json() ?? [];
   }
 
+  async getDiasHorariosAvailable(): Promise<DiaSemana[]>{
+    const data = await fetch(`${this.url}/horarios-disp`);
+    return await data.json() ?? [];
+  }
+
   async getDiaById(id: string): Promise<DiaSemana>{
     const data = await fetch(`${this.url}/${id}`);
     return await data.json();

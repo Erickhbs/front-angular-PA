@@ -67,7 +67,7 @@ export class CadastrarAgendamentoComponent {
   constructor(router: Router){
     this.router = router;
 
-    this.diaService.getDias().then(
+    this.diaService.getDiasHorariosAvailable().then(
       (dias: DiaSemana[]) => {
         this.diaList = dias;
       }
