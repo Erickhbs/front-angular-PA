@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="container">
       <h1>Listagem de agendamentos</h1>
+      <br>
 
       <table class="table">
         <thead>

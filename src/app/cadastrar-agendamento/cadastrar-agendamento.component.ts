@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DiaSemanaService } from '../service/dia-semana.service';
@@ -9,7 +9,7 @@ import { Horario } from '../dados/horario-data';
 import { Servico } from '../dados/servico-data';
 import { AgendamentoRequest } from '../dados/agendamento-data';
 import { AgendamentoService } from '../service/agendamento.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-agendamento',
@@ -22,8 +22,9 @@ import { Router } from '@angular/router';
       <hr>
       <br>
 
-      <h2>Horários Disponíveis</h2>
       <form [formGroup]="aplicaForm" (submit)="submeterForm()">
+        <h2>Horários Disponíveis</h2>
+
         <div *ngFor="let d of diaList">
           <br>
           <div>
@@ -33,7 +34,7 @@ import { Router } from '@angular/router';
             <input type="radio"  id="id{{ d.id }}/{{ h.id }}" value="{{ d.id }}/{{ h.id }}" formControlName="inputDiaHorario">
             <label for="id{{ d.id }}/{{ h.id }}" class="btn btn-light">{{ h.hora }}</label>
           </div>
-        </div>
+        </div><br>
 
         <label for="input-servico">Serviço</label><br>
         <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
@@ -48,7 +49,7 @@ import { Router } from '@angular/router';
   `,
   styleUrl: './cadastrar-agendamento.component.css'
 })
-export class CadastrarAgendamentoComponent {
+export class CadastrarAgendamentoComponent implements OnInit {
   agendamentoService = inject(AgendamentoService);
   diaService = inject(DiaSemanaService);
   horarioService = inject(HorarioService);
@@ -65,24 +66,26 @@ export class CadastrarAgendamentoComponent {
     inputServico: new FormControl('')
   });
 
-  router: Router;
+  idServico: string = '';
 
-  constructor(router: Router, private cdr: ChangeDetectorRef){
-    this.router = router;
-
+  constructor(
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private el: ElementRef
+  ){
     this.diaService.getDiasHorariosAvailable().then(
       (dias: DiaSemana[]) => {
         this.diaList = dias;
-        console.log(dias);
       }
-    )
+    );
 
     this.servicoService.getServicos().then(
       (servicos: Servico[]) => {
         this.servicoList = servicos;
         this.cdr.detectChanges(); 
       }
-    )
+    );
   }
 
   submeterForm(){
@@ -97,20 +100,19 @@ export class CadastrarAgendamentoComponent {
       usuario: token as string
     };
 
-    console.log(this.agendamento);
     this.agendamentoService.cadastrarAgendamento(this.agendamento);
 
     this.router.navigate([''])
   }
 
-  // carregarHorariosDisponiveis(){
-  //   let campos = this.aplicaForm.value;
-  //   let [horariosDoDia] = this.diaList.filter(
-  //     diaList => diaList.id == campos.inputDia
-  //   );
+  ngOnInit(){
+    this.route.params.subscribe(params => {
+      this.idServico = params['id'];
+    });
 
-  //   this.horarioList = horariosDoDia.horarios!;
-
-  //   this.diaSelecionado = true;
-  // }
+    var select = this.el.nativeElement.querySelector('#input-servico');
+    console.log(select);
+    console.log(this.idServico);
+    console.log(select.options[select.selectedIndex]);
+  }
 }

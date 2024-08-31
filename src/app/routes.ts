@@ -40,6 +40,11 @@ const routeConfig: Routes = [
         title: 'Página de agendamento'
     },
     {
+        path: 'cadastro-agendamento/:id',
+        component: CadastrarAgendamentoComponent,
+        title: 'Página de agendamento'
+    },
+    {
         path: 'disponibilizar-horarios',
         component: DisponibilizarHorariosComponent,
         title: 'Disponibilizar horários'

@@ -13,7 +13,10 @@ import { FormDiaHorarioComponent } from './form-dia-horario/form-dia-horario.com
   imports: [CommonModule, ReactiveFormsModule, FormDiaHorarioComponent],
   template: `
     <div class="container">
+      <br>
       <h1>Disponibilizar horários</h1>
+      <hr>
+      <br>
 
       <app-form-dia-horario [dias]="diaSemanaList" [horarios]="horarioList"></app-form-dia-horario>
     </div>

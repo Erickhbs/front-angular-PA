@@ -22,6 +22,8 @@ import { DiaSemanaService } from '../../service/dia-semana.service';
         </div>
       </div>
 
+      <br>
+
       <h3>Horários</h3>
       <div formGroupName="horarios" class="botoes">
         <div *ngFor="let h of horarios">
@@ -32,6 +34,8 @@ import { DiaSemanaService } from '../../service/dia-semana.service';
           <br>
         </div>
       </div>
+
+      <br>
 
       <button type="submit" class="btn btn-secondary">Adicionar horários</button>
     </form>

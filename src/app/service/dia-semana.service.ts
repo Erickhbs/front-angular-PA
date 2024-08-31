@@ -46,7 +46,7 @@ export class DiaSemanaService {
         }
       }
     );
-    this.router.navigate(['listar-dia']);
+    //this.router.navigate(['listar-dia']);
   }
 
   async atualizarDia(diaSemana: DiaSemana){

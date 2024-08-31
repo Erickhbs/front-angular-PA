@@ -13,6 +13,8 @@ import { HorarioService } from '../service/horario.service';
   template: `
     <div class="container">
       <h1>Listagem de dias</h1>
+      <hr>
+      <br>
 
       <div *ngFor="let d of diaSemanaList" href="#">
         <div>
@@ -32,7 +34,7 @@ import { HorarioService } from '../service/horario.service';
         <button (click)="excluirDia( d.id! )" class="btn btn-outline-danger">Excluir dia</button>
       </div>
 
-      <br><br>
+      <br>
       <span class="obs">Para disponibilizar horários, acesse: <a href="disponibilizar-horarios">disponibilizar horários</a>.</span>
     </div>
   `,

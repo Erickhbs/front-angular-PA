@@ -10,12 +10,15 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="container">
       <h1>Listagem de serviços</h1>
-      <div *ngFor="let s of servicoList" class="card" style="width: 18rem;">
-        <img src="{{ s.linkFoto }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ s.nome }}</h5>
-          <p class="card-text">R$ {{ s.preco }}</p>
-          <a (click)="removerServico( s.id! )" href="#" class="btn btn-dark">Excluir</a>
+      <hr>
+      <div id="cards">
+        <div *ngFor="let s of servicoList" class="card" style="width: 18rem;">
+          <img src="{{ s.linkFoto }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ s.nome }}</h5>
+            <p class="card-text">R$ {{ s.preco }}</p>
+            <a (click)="removerServico( s.id! )" href="#" class="btn btn-dark">Excluir</a>
+          </div>
         </div>
       </div>
     </div>
