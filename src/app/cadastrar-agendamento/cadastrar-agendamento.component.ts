@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { DiaSemanaService } from '../service/dia-semana.service';
@@ -23,12 +23,12 @@ import { ActivatedRoute, Router } from '@angular/router';
       <br>
 
       <form [formGroup]="aplicaForm" (submit)="submeterForm()">
-        <h2>Horários Disponíveis</h2>
+        <h3>Horários Disponíveis</h3>
 
         <div *ngFor="let d of diaList">
           <br>
           <div>
-            <h5>{{ d.dia }}</h5>
+            <h6>{{ d.dia }}</h6>
           </div>
           <div class="input-horario" *ngFor="let h of d.horarios">
             <input type="radio"  id="id{{ d.id }}/{{ h.id }}" value="{{ d.id }}/{{ h.id }}" formControlName="inputDiaHorario">
@@ -36,9 +36,9 @@ import { ActivatedRoute, Router } from '@angular/router';
           </div>
         </div><br>
 
-        <label for="input-servico">Serviço</label><br>
+        <label for="input-servico"><h3>Serviço</h3></label><br>
         <select id="input-servico" formControlName="inputServico" class="form-select" aria-label="Default select example">
-          <option *ngFor="let s of servicoList" value="{{ s.id }}">{{ s.nome }} - R$ {{ s.preco }}</option>
+          <option *ngFor="let s of servicoList" id="{{ s.id }}" value="{{ s.id }}">{{ s.nome }} - R$ {{ s.preco }}</option>
         </select><br>
 
         <button type="submit" class="btn btn-dark">Agendar</button>
@@ -70,9 +70,7 @@ export class CadastrarAgendamentoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private el: ElementRef
   ){
     this.diaService.getDiasHorariosAvailable().then(
       (dias: DiaSemana[]) => {
@@ -83,7 +81,6 @@ export class CadastrarAgendamentoComponent implements OnInit {
     this.servicoService.getServicos().then(
       (servicos: Servico[]) => {
         this.servicoList = servicos;
-        this.cdr.detectChanges(); 
       }
     );
   }
@@ -110,9 +107,6 @@ export class CadastrarAgendamentoComponent implements OnInit {
       this.idServico = params['id'];
     });
 
-    var select = this.el.nativeElement.querySelector('#input-servico');
-    console.log(select);
-    console.log(this.idServico);
-    console.log(select.options[select.selectedIndex]);
+    this.aplicaForm.get('inputServico')!.setValue(this.idServico);
   }
 }
